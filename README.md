@@ -1,7 +1,7 @@
 
-  # Futuristic Gamified Dashboard UI
+  # Shadow Arena
 
-  This is a code bundle for Futuristic Gamified Dashboard UI. The original project is available at https://www.figma.com/design/il4rhak1reqZQrl3b0J5LX/Futuristic-Gamified-Dashboard-UI.
+  This is a code bundle for Shadow Arena. The original project is available at https://www.figma.com/design/il4rhak1reqZQrl3b0J5LX/Futuristic-Gamified-Dashboard-UI.
 
   ## Running the code
 
