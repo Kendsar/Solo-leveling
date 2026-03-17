@@ -1,0 +1,299 @@
+{
+  "user": {
+    "firstName": "Jin",
+    "lastName": "Woo",
+    "level": 39,
+    "profilePicture": "link",
+    "experience": 1040960003,
+    "xpForNextLevel": 1050000000,
+    "titles": [
+      {
+        "title": "Shadow Monarch",
+        "levelRequired": 35,
+        "unlocked": true
+      },
+      {
+        "title": "Elite Hunter",
+        "levelRequired": 25,
+        "unlocked": true
+      },
+      {
+        "title": "Dungeon Slayer",
+        "levelRequired": 15,
+        "unlocked": true
+      },
+      {
+        "title": "Rookie Hunter",
+        "levelRequired": 1,
+        "unlocked": true
+      }
+    ],
+    "currentTitle": "Shadow Monarch",
+    "inventory": [
+      {
+        "name": "XP Boost Potion",
+        "quantity": 3,
+        "effect": "+50% XP for 1h"
+      },
+      {
+        "name": "Health Potion",
+        "quantity": 5,
+        "effect": "Restore 100 HP"
+      },
+      {
+        "name": "Mystery Chest",
+        "quantity": 1,
+        "effect": "Random reward"
+      }
+    ],
+    "streak": 14,
+    "dailyReward": {
+      "xp": 50,
+      "item": {
+        "name": "Mystery Chest",
+        "rarity": "Rare"
+      }
+    },
+    "sentiment": "Confident",
+    "xpGainedToday": 125
+  },
+  "goals": [
+    {
+      "title": "Train 120 days",
+      "progress": 45,
+      "target": 120,
+      "xpReward": 500
+    },
+    {
+      "title": "Muscle-Up",
+      "progress": 5,
+      "target": 10,
+      "xpReward": 300
+    },
+    {
+      "title": "200 lbs bench press",
+      "progress": 0,
+      "target": 1,
+      "xpReward": 400
+    }
+  ],
+  "achievements": [
+    {
+      "title": "First Dungeon Cleared",
+      "xpReward": 100,
+      "unlocked": true,
+      "dateUnlocked": "2026-03-01"
+    },
+    {
+      "title": "7-Day Streak",
+      "xpReward": 150,
+      "unlocked": true,
+      "dateUnlocked": "2026-03-14"
+    },
+    {
+      "title": "Elite Hunter",
+      "xpReward": 500,
+      "unlocked": false,
+      "dateUnlocked": null
+    }
+  ],
+  "dailyTasks": [
+    {
+      "day": "Mon",
+      "date": "2026-03-16",
+      "tasks": [
+        {
+          "title": "Workout",
+          "completed": true,
+          "xp": 20
+        },
+        {
+          "title": "Drink Water",
+          "completed": false,
+          "xp": 15
+        },
+        {
+          "title": "3 big meals",
+          "completed": true,
+          "xp": 10
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 66,
+      "xpEarned": 30
+    },
+    {
+      "day": "Tue",
+      "date": "2026-03-17",
+      "tasks": [
+        {
+          "title": "Running Workout",
+          "completed": true,
+          "xp": 20
+        },
+        {
+          "title": "Drink Water",
+          "completed": false,
+          "xp": 15
+        },
+        {
+          "title": "Meditation 15 min",
+          "completed": false,
+          "xp": 10
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 33,
+      "xpEarned": 20
+    },
+    {
+      "day": "Wed",
+      "date": "2026-03-18",
+      "tasks": [
+        {
+          "title": "Morning Workout",
+          "completed": true,
+          "xp": 20
+        },
+        {
+          "title": "Drink water",
+          "completed": true,
+          "xp": 15
+        },
+        {
+          "title": "7h sleep",
+          "completed": false,
+          "xp": 10
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 66,
+      "xpEarned": 35
+    },
+    {
+      "day": "Thu",
+      "date": "2026-03-19",
+      "tasks": [
+        {
+          "title": "Morning Workout",
+          "completed": false,
+          "xp": 20
+        },
+        {
+          "title": "Drink enough water",
+          "completed": true,
+          "xp": 15
+        },
+        {
+          "title": "Meditation 15 min",
+          "completed": false,
+          "xp": 10
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 33,
+      "xpEarned": 15
+    },
+    {
+      "day": "Fri",
+      "date": "2026-03-20",
+      "tasks": [
+        {
+          "title": "Morning Workout",
+          "completed": true,
+          "xp": 20
+        },
+        {
+          "title": "Drink enough water",
+          "completed": true,
+          "xp": 15
+        },
+        {
+          "title": "Meditation 15 min",
+          "completed": true,
+          "xp": 10
+        }
+      ],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 45
+    },
+    {
+      "day": "Sat",
+      "date": "2026-03-21",
+      "tasks": [
+        {
+          "title": "Morning Workout",
+          "completed": false,
+          "xp": 20
+        },
+        {
+          "title": "Drink enough water",
+          "completed": false,
+          "xp": 15
+        },
+        {
+          "title": "Meditation 15 min",
+          "completed": true,
+          "xp": 10
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 33,
+      "xpEarned": 10
+    },
+    {
+      "day": "Sun",
+      "date": "2026-03-22",
+      "tasks": [
+        {
+          "title": "Push Day Workout",
+          "completed": true,
+          "xp": 20
+        },
+        {
+          "title": "Drink enough water",
+          "completed": true,
+          "xp": 15
+        },
+        {
+          "title": "Meditation 15 min",
+          "completed": true,
+          "xp": 10
+        }
+      ],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 45
+    }
+  ],
+  "dailyHabits": [
+    {
+      "habit": "Drink water",
+      "completed": true,
+      "xp": 15
+    },
+    {
+      "habit": "Quit Smoking",
+      "completed": false,
+      "xp": 30
+    },
+    {
+      "habit": "7h sleep",
+      "completed": true,
+      "xp": 10
+    },
+    {
+      "habit": "Reading at least 10 pages",
+      "completed": true,
+      "xp": 20
+    }
+  ],
+  "weeklySummary": {
+    "totalXP": 240,
+    "tasksCompleted": 14,
+    "habitsCompleted": 3,
+    "completionRate": 66,
+    "streakBonusXP": 50
+  }
+}
