@@ -14,6 +14,40 @@
  */
 
 import hunterData from '../../imports/pasted_text/user-data.json';
+import { avatarService } from '../services/AvatarService';
+
+export type ExerciseType = "strength" | "cardio" | "isometric";
+
+export interface ExerciseSet {
+  reps?: number;
+  weight?: number; // kg
+  durationSec?: number; // for holds if needed per set
+}
+
+export interface Exercise {
+  name: string;
+  type: ExerciseType;
+  sets?: ExerciseSet[]; // for strength / hybrid
+  durationSec?: number; // isometric (plank, wall sit)
+  durationMin?: number; // cardio
+  distanceKm?: number; // optional cardio metric
+  completed: boolean;
+}
+
+export interface DailyWorkout {
+  title: string; // "Wed - Push Day"
+  day: string;   // "Wed"
+  dayDate: string;
+  currentDate: boolean;
+  disabled: boolean;
+  isRestDay: boolean;
+
+  exercises: Exercise[];
+
+  done: boolean;
+  doughnutProgress: number;
+  xpEarned: number;
+}
 
 export interface HunterData {
   user: {
@@ -21,6 +55,8 @@ export interface HunterData {
     lastName: string;
     level: number;
     profilePicture: string;
+    profilePicturePath?: string;
+    profilePictureUrl?: string | null;
     experience: number;
     xpForNextLevel: number;
     titles: Array<{
@@ -45,38 +81,32 @@ export interface HunterData {
     sentiment: string;
     xpGainedToday: number;
   };
+
   goals: Array<{
     title: string;
     progress: number;
     target: number;
     xpReward: number;
   }>;
+
   achievements: Array<{
     title: string;
     xpReward: number;
     unlocked: boolean;
     dateUnlocked: string | null;
   }>;
-  dailyTasks: Array<{
-    day: string;
-    date: string;
-    tasks: Array<{
-      title: string;
-      completed: boolean;
-      xp: number;
-    }>;
-    done: boolean;
-    doughnutProgress: number;
-    xpEarned: number;
-  }>;
+
+  dailyWorkouts: DailyWorkout[];
+
   dailyHabits: Array<{
     habit: string;
     completed: boolean;
     xp: number;
   }>;
+
   weeklySummary: {
     totalXP: number;
-    tasksCompleted: number;
+    workoutsCompleted: number;
     habitsCompleted: number;
     completionRate: number;
     streakBonusXP: number;
@@ -89,35 +119,42 @@ export function getHunterData(): HunterData {
 
 export function processUserData() {
   const data = getHunterData();
-  
+
   // Calculate energy level based on streak and daily completion
   // Use a formula that considers streak strength
   const baseEnergy = Math.min(100, (data.user.streak / 20) * 100);
   const todayBonus = (data.user.xpGainedToday / 50) * 20;
   const energyLevel = Math.min(100, Math.max(50, baseEnergy + todayBonus));
-  
+
+  // Resolve the current profile picture utilizing the swappable interface layer
+  const avatarUrl = data.user.profilePicturePath 
+    ? avatarService.getAvatarUrl(data.user.profilePicturePath) 
+    : (data.user.profilePicture !== 'link' && data.user.profilePicture ? data.user.profilePicture : null);
+
   return {
+    userId: "hunter-001", // Default local ID mapping sequence
     userName: `${data.user.firstName} ${data.user.lastName}`,
     rank: data.user.currentTitle,
     level: data.user.level,
     currentXP: data.user.experience,
     maxXP: data.user.xpForNextLevel,
     energyLevel: Math.round(energyLevel),
+    profilePictureUrl: avatarUrl,
   };
 }
 
 export function processSystemStats() {
   const data = getHunterData();
-  
+
   // Calculate focus score based on habits completion
   const completedHabits = data.dailyHabits.filter(h => h.completed).length;
   const focusScore = Math.round((completedHabits / data.dailyHabits.length) * 100);
-  
+
   return {
     overallProgress: data.weeklySummary.completionRate,
     stats: {
       streak: data.user.streak,
-      tasksCompleted: data.weeklySummary.tasksCompleted,
+      tasksCompleted: data.weeklySummary.workoutsCompleted,
       goals: data.goals.length,
       focus: focusScore,
     },
@@ -126,36 +163,73 @@ export function processSystemStats() {
 
 export function processWeeklyData() {
   const data = getHunterData();
-  const today = new Date('2026-03-17'); // Current date from the user's context
-  
-  return data.dailyTasks.map((day) => {
-    const dayDate = new Date(day.date);
+  // Using the system date as context
+  const today = new Date('2026-03-20');
+  today.setHours(0, 0, 0, 0);
+
+  return data.dailyWorkouts.map((day) => {
+    const dayDate = new Date(day.dayDate);
+    dayDate.setHours(0, 0, 0, 0);
     const isPast = dayDate < today;
-    const isToday = dayDate.toDateString() === today.toDateString();
+    const isToday = dayDate.getTime() === today.getTime();
     const isFuture = dayDate > today;
-    
+
     // Determine status
     let status: "completed" | "active" | "upcoming" | "locked";
     if (day.done) {
       status = "completed";
+    } else if (isPast) {
+      status = "locked";
     } else if (isToday) {
       status = "active";
-    } else if (isFuture) {
-      status = "upcoming";
     } else {
-      // Past but not completed - still show as active or upcoming
-      status = "active";
+      status = "upcoming";
     }
-    
-    // Format date as MM.DD
-    const dateStr = `${String(dayDate.getMonth() + 1).padStart(2, '0')}.${String(dayDate.getDate()).padStart(2, '0')}`;
-    
+
+    // Format date as DD/MM/YYYY
+    const dd = String(dayDate.getDate()).padStart(2, '0');
+    const mm = String(dayDate.getMonth() + 1).padStart(2, '0');
+    const yyyy = dayDate.getFullYear();
+    const dateStr = `${dd}/${mm}/${yyyy}`;
+
+    // Extract title (e.g., "Mon - Push Day" -> "Push Day Workout")
+    const titleParts = day.title.split(' - ');
+    let title = titleParts.length > 1 ? titleParts[1] : day.title;
+    if (!title.toLowerCase().includes('workout') && !title.toLowerCase().includes('rest')) {
+      title += ' Workout';
+    }
+
+    // Process exercises for display
+    const exercises = day.exercises.map(ex => {
+      let details = "";
+      if (ex.sets && ex.sets.length > 0) {
+        const numSets = ex.sets.length;
+        const avgReps = Math.round(ex.sets.reduce((sum, s) => sum + (s.reps || 0), 0) / numSets);
+        const maxWeight = Math.max(...ex.sets.map(s => s.weight || 0));
+        details = `(${numSets} sets - ${avgReps} reps)`;
+        if (maxWeight > 0) details += ` (${maxWeight}Kg)`;
+      } else if (ex.durationMin) {
+        details = `(${ex.durationMin} min)`;
+        if (ex.distanceKm) details += ` (${ex.distanceKm}Km)`;
+      } else if (ex.durationSec) {
+        details = `(${ex.durationSec} sec)`;
+      }
+      return {
+        name: ex.name,
+        completed: ex.completed,
+        details
+      };
+    });
+
     return {
       day: getDayName(day.day),
       date: dateStr,
+      title,
       status,
       completionRate: day.doughnutProgress,
-      tasks: day.tasks.length,
+      exercises,
+      isCurrentOrFuture: isToday || isFuture,
+      isDisabled: isPast
     };
   });
 }
@@ -171,4 +245,16 @@ function getDayName(shortDay: string): string {
     'Sun': 'Sunday',
   };
   return dayMap[shortDay] || shortDay;
+}
+
+export function processGoalsData() {
+  return getHunterData().goals;
+}
+
+export function processHabitsData() {
+  return getHunterData().dailyHabits;
+}
+
+export function processAchievementsData() {
+  return getHunterData().achievements;
 }

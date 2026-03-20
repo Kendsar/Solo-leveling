@@ -1,11 +1,12 @@
 {
   "user": {
-    "firstName": "Jin",
-    "lastName": "Woo",
+    "firstName": "Skander",
+    "lastName": "Jenhani",
     "level": 39,
     "profilePicture": "link",
     "experience": 1040960003,
     "xpForNextLevel": 1050000000,
+    "createdAt": "2026-03-01",
     "titles": [
       {
         "title": "Shadow Monarch",
@@ -79,192 +80,191 @@
   ],
   "achievements": [
     {
-      "title": "First Dungeon Cleared",
+      "title": "First Workout Completed",
       "xpReward": 100,
       "unlocked": true,
       "dateUnlocked": "2026-03-01"
     },
     {
-      "title": "7-Day Streak",
+      "title": "7-Day Training Streak",
       "xpReward": 150,
       "unlocked": true,
       "dateUnlocked": "2026-03-14"
     },
     {
-      "title": "Elite Hunter",
+      "title": "Elite Athlete",
       "xpReward": 500,
       "unlocked": false,
       "dateUnlocked": null
     }
   ],
-  "dailyTasks": [
+  "dailyWorkouts": [
     {
-      "day": "Mon",
-      "date": "2026-03-16",
-      "tasks": [
-        {
-          "title": "Workout",
-          "completed": true,
-          "xp": 20
-        },
-        {
-          "title": "Drink Water",
-          "completed": false,
-          "xp": 15
-        },
-        {
-          "title": "3 big meals",
-          "completed": true,
-          "xp": 10
-        }
-      ],
-      "done": false,
-      "doughnutProgress": 66,
-      "xpEarned": 30
-    },
-    {
-      "day": "Tue",
-      "date": "2026-03-17",
-      "tasks": [
-        {
-          "title": "Running Workout",
-          "completed": true,
-          "xp": 20
-        },
-        {
-          "title": "Drink Water",
-          "completed": false,
-          "xp": 15
-        },
-        {
-          "title": "Meditation 15 min",
-          "completed": false,
-          "xp": 10
-        }
-      ],
-      "done": false,
-      "doughnutProgress": 33,
-      "xpEarned": 20
-    },
-    {
-      "day": "Wed",
-      "date": "2026-03-18",
-      "tasks": [
-        {
-          "title": "Morning Workout",
-          "completed": true,
-          "xp": 20
-        },
-        {
-          "title": "Drink water",
-          "completed": true,
-          "xp": 15
-        },
-        {
-          "title": "7h sleep",
-          "completed": false,
-          "xp": 10
-        }
-      ],
-      "done": false,
-      "doughnutProgress": 66,
-      "xpEarned": 35
-    },
-    {
-      "day": "Thu",
-      "date": "2026-03-19",
-      "tasks": [
-        {
-          "title": "Morning Workout",
-          "completed": false,
-          "xp": 20
-        },
-        {
-          "title": "Drink enough water",
-          "completed": true,
-          "xp": 15
-        },
-        {
-          "title": "Meditation 15 min",
-          "completed": false,
-          "xp": 10
-        }
-      ],
-      "done": false,
-      "doughnutProgress": 33,
-      "xpEarned": 15
-    },
-    {
-      "day": "Fri",
-      "date": "2026-03-20",
-      "tasks": [
-        {
-          "title": "Morning Workout",
-          "completed": true,
-          "xp": 20
-        },
-        {
-          "title": "Drink enough water",
-          "completed": true,
-          "xp": 15
-        },
-        {
-          "title": "Meditation 15 min",
-          "completed": true,
-          "xp": 10
-        }
-      ],
+      "title": "Rest Day",
+      "day": "Sun",
+      "dayDate": "2026-03-19",
+      "currentDate": false,
+      "disabled": false,
+      "isRestDay": true,
+      "exercises": [],
       "done": true,
       "doughnutProgress": 100,
-      "xpEarned": 45
-    },
-    {
-      "day": "Sat",
-      "date": "2026-03-21",
-      "tasks": [
-        {
-          "title": "Morning Workout",
-          "completed": false,
-          "xp": 20
-        },
-        {
-          "title": "Drink enough water",
-          "completed": false,
-          "xp": 15
-        },
-        {
-          "title": "Meditation 15 min",
-          "completed": true,
-          "xp": 10
-        }
-      ],
-      "done": false,
-      "doughnutProgress": 33,
       "xpEarned": 10
     },
     {
-      "day": "Sun",
-      "date": "2026-03-22",
-      "tasks": [
+      "title": "Push Day",
+      "day": "Mon",
+      "dayDate": "2026-03-16",
+      "currentDate": false,
+      "disabled": true,
+      "isRestDay": false,
+      "exercises": [
         {
-          "title": "Push Day Workout",
-          "completed": true,
-          "xp": 20
+          "name": "Bench Press",
+          "type": "strength",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 60
+            },
+            {
+              "reps": 8,
+              "weight": 70
+            },
+            {
+              "reps": 6,
+              "weight": 80
+            }
+          ],
+          "completed": true
         },
         {
-          "title": "Drink enough water",
-          "completed": true,
-          "xp": 15
-        },
-        {
-          "title": "Meditation 15 min",
-          "completed": true,
-          "xp": 10
+          "name": "Incline Dumbbell Press",
+          "type": "strength",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 20
+            },
+            {
+              "reps": 10,
+              "weight": 22
+            }
+          ],
+          "completed": true
         }
       ],
       "done": true,
       "doughnutProgress": 100,
-      "xpEarned": 45
+      "xpEarned": 40
+    },
+    {
+      "title": "Running Workout",
+      "day": "Tue",
+      "dayDate": "2026-03-17",
+      "currentDate": false,
+      "disabled": true,
+      "isRestDay": false,
+      "exercises": [
+        {
+          "name": "Outdoor Run",
+          "type": "cardio",
+          "durationMin": 30,
+          "distanceKm": 5,
+          "completed": true
+        }
+      ],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 30
+    },
+    {
+      "title": "Core & Hold",
+      "day": "Wed",
+      "dayDate": "2026-03-18",
+      "currentDate": true,
+      "disabled": false,
+      "isRestDay": false,
+      "exercises": [
+        {
+          "name": "Plank",
+          "type": "isometric",
+          "durationSec": 90,
+          "completed": true
+        },
+        {
+          "name": "Hanging Leg Raises",
+          "type": "strength",
+          "sets": [
+            {
+              "reps": 12
+            },
+            {
+              "reps": 10
+            },
+            {
+              "reps": 8
+            }
+          ],
+          "completed": false
+        }
+      ],
+      "done": false,
+      "doughnutProgress": 50,
+      "xpEarned": 20
+    },
+    {
+      "title": "Rest Day",
+      "day": "Thu",
+      "dayDate": "2026-03-19",
+      "currentDate": false,
+      "disabled": false,
+      "isRestDay": true,
+      "exercises": [],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 10
+    },
+    {
+      "title": "Pull Day",
+      "day": "Fri",
+      "dayDate": "2026-03-20",
+      "currentDate": false,
+      "disabled": false,
+      "isRestDay": false,
+      "exercises": [
+        {
+          "name": "Pull Ups",
+          "type": "strength",
+          "sets": [
+            {
+              "reps": 10
+            },
+            {
+              "reps": 8
+            },
+            {
+              "reps": 6
+            }
+          ],
+          "completed": true
+        }
+      ],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 35
+    },
+    {
+      "title": "Rest Day",
+      "day": "Thu",
+      "dayDate": "2026-03-19",
+      "currentDate": false,
+      "disabled": false,
+      "isRestDay": true,
+      "exercises": [],
+      "done": true,
+      "doughnutProgress": 100,
+      "xpEarned": 10
     }
   ],
   "dailyHabits": [
@@ -274,24 +274,19 @@
       "xp": 15
     },
     {
-      "habit": "Quit Smoking",
-      "completed": false,
-      "xp": 30
-    },
-    {
       "habit": "7h sleep",
       "completed": true,
       "xp": 10
     },
     {
-      "habit": "Reading at least 10 pages",
+      "habit": "Reading 10 pages",
       "completed": true,
       "xp": 20
     }
   ],
   "weeklySummary": {
     "totalXP": 240,
-    "tasksCompleted": 14,
+    "workoutsCompleted": 4,
     "habitsCompleted": 3,
     "completionRate": 66,
     "streakBonusXP": 50

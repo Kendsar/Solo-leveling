@@ -2,12 +2,21 @@ import { motion } from "motion/react";
 import { Calendar } from "lucide-react";
 import { DayCard } from "./DayCard";
 
-interface DayData {
+export interface ProcessedExercise {
+  name: string;
+  completed: boolean;
+  details: string;
+}
+
+export interface DayData {
   day: string;
   date: string;
+  title: string;
   status: "completed" | "active" | "upcoming" | "locked";
   completionRate: number;
-  tasks: number;
+  exercises: ProcessedExercise[];
+  isCurrentOrFuture: boolean;
+  isDisabled: boolean;
 }
 
 interface WeeklyGridProps {
@@ -17,7 +26,7 @@ interface WeeklyGridProps {
 export function WeeklyGrid({ weekData }: WeeklyGridProps) {
   // Calculate current week number
   const getCurrentWeek = (): number => {
-    const now = new Date('2026-03-17');
+    const now = new Date('2026-03-20');
     const start = new Date(now.getFullYear(), 0, 1);
     const diff = now.getTime() - start.getTime();
     const oneWeek = 1000 * 60 * 60 * 24 * 7;
@@ -35,7 +44,7 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
       <div className="flex items-center gap-3 mb-6">
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-lg text-cyan-100 uppercase tracking-wider">Weekly Mission Log</h2>
+          <h2 className="text-lg text-cyan-100 uppercase tracking-wider">Weekly Workouts</h2>
         </div>
         <div className="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/30 to-transparent" />
         <div className="flex items-center gap-2 px-3 py-1 rounded border border-cyan-500/20 bg-slate-950/50">
@@ -45,15 +54,11 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
       </div>
 
       {/* Weekly Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-        {weekData.map((day, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {weekData.map((dayData, index) => (
           <DayCard
-            key={day.day}
-            day={day.day}
-            date={day.date}
-            status={day.status}
-            completionRate={day.completionRate}
-            tasks={day.tasks}
+            key={dayData.day}
+            dayData={dayData}
             delay={0.5 + index * 0.1}
           />
         ))}

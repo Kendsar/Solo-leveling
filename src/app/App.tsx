@@ -1,127 +1,73 @@
-import { motion } from "motion/react";
-import { TopCommandBar } from "./components/TopCommandBar";
-import { CentralControlPanel } from "./components/CentralControlPanel";
-import { WeeklyGrid } from "./components/WeeklyGrid";
-import { processUserData, processSystemStats, processWeeklyData } from "./utils/processHunterData";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Sidebar } from "./components/Sidebar";
+import { Dashboard } from "./pages/Dashboard";
+import { AchievementsPage } from "./pages/AchievementsPage";
+import { PlaceholderPage } from "./pages/PlaceholderPage";
+import SoloLevelingNotification from "./components/ui/notification";
+import { Menu } from "lucide-react";
 
 export default function App() {
-  // Load data from JSON
-  const userData = processUserData();
-  const systemStats = processSystemStats();
-  const weekData = processWeeklyData();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e1a] overflow-hidden">
-      {/* Animated background layers */}
-      <div className="fixed inset-0 z-0">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0a0e1a] to-blue-950/30" />
-        
-        {/* Radial gradients for depth */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
-        
-        {/* Animated grid overlay */}
-        <motion.div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px',
-          }}
-          animate={{ 
-            backgroundPosition: ['0px 0px', '100px 100px'],
-          }}
-          transition={{ 
-            duration: 20, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-        />
-        
-        {/* Scan line effect */}
-        <motion.div
-          className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent blur-sm"
-          animate={{ top: ['-2px', '100%'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        />
-        
-        {/* Particle field */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
+    <BrowserRouter>
+      <div className="relative min-h-screen bg-[#0a0e1a] flex overflow-hidden">
+        {/* Static Background Core */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0a0e1a] to-blue-950/30" />
+          
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
+          
+          <div
+            className="absolute inset-0 opacity-10"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              opacity: [0.2, 0.6, 0.2],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
+              backgroundImage: `
+                linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '100px 100px',
             }}
           />
-        ))}
-      </div>
+        </div>
 
-      {/* Main content */}
-      <div className="relative z-10 container mx-auto px-6 py-8 max-w-[1600px]">
-        <div className="space-y-8">
-          {/* Top Command Bar */}
-          <TopCommandBar {...userData} />
+        {/* Global Game Navigation Sidebar */}
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+        {/* Dynamic Route Viewport Wrapper */}
+        <main className="flex-1 ml-0 md:ml-64 relative z-10 h-screen overflow-y-auto no-scrollbar flex flex-col scroll-smooth">
           
-          {/* Central Control Panel */}
-          <CentralControlPanel {...systemStats} />
-          
-          {/* Weekly Mission Grid */}
-          <WeeklyGrid weekData={weekData} />
-        </div>
-      </div>
+          {/* Mobile Header with Hamburger Interaction */}
+          <div className="md:hidden sticky top-0 z-30 bg-[#0a0f16]/90 backdrop-blur border-b border-cyan-500/20 p-4 flex items-center justify-between shadow-[0_5px_20px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center gap-3">
+               <div className="w-8 h-8 rounded-full border border-cyan-400/40 bg-gradient-to-br from-cyan-950/40 to-blue-950/40 flex items-center justify-center">
+                 <div className="w-4 h-4 rounded-sm shadow-[0_0_10px_rgba(34,211,238,0.8)] border-2 border-cyan-400 bg-cyan-950/50" />
+               </div>
+               <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 tracking-widest uppercase text-sm filter drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">Hunter OS</span>
+            </div>
+            <button 
+              onClick={() => setIsSidebarOpen(true)} 
+              className="p-2 text-cyan-500/70 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500/50 rounded-lg"
+            >
+               <Menu size={24} />
+            </button>
+          </div>
 
-      {/* Corner UI Elements */}
-      <div className="fixed top-4 left-4 z-20">
-        <div className="flex flex-col gap-1">
-          <div className="h-8 w-[2px] bg-gradient-to-b from-cyan-400 to-transparent" />
-          <div className="w-8 h-[2px] bg-gradient-to-r from-cyan-400 to-transparent" />
-        </div>
+          <div className="container mx-auto px-4 md:px-6 py-6 md:py-8 max-w-[1600px] flex-1">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/quests" element={<PlaceholderPage title="Quests" />} />
+              <Route path="/training" element={<PlaceholderPage title="Training" />} />
+              <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
+              <Route path="/achievements" element={<AchievementsPage />} />
+              <Route path="/system" element={<SoloLevelingNotification />} />
+              {/* Catch-all for undefined or locked routes */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
+        </main>
       </div>
-      
-      <div className="fixed top-4 right-4 z-20">
-        <div className="flex flex-col items-end gap-1">
-          <div className="h-8 w-[2px] bg-gradient-to-b from-cyan-400 to-transparent" />
-          <div className="w-8 h-[2px] bg-gradient-to-l from-cyan-400 to-transparent" />
-        </div>
-      </div>
-      
-      <div className="fixed bottom-4 left-4 z-20">
-        <div className="flex flex-col gap-1">
-          <div className="w-8 h-[2px] bg-gradient-to-r from-cyan-400 to-transparent" />
-          <div className="h-8 w-[2px] bg-gradient-to-t from-cyan-400 to-transparent" />
-        </div>
-      </div>
-      
-      <div className="fixed bottom-4 right-4 z-20">
-        <div className="flex flex-col items-end gap-1">
-          <div className="w-8 h-[2px] bg-gradient-to-l from-cyan-400 to-transparent" />
-          <div className="h-8 w-[2px] bg-gradient-to-t from-cyan-400 to-transparent" />
-        </div>
-      </div>
-
-      {/* System watermark */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20">
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/20 bg-slate-950/60 backdrop-blur-sm">
-          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50" />
-          <span className="text-[10px] text-cyan-400/60 uppercase tracking-widest font-mono">
-            Hunter System v{userData.level / 10}.{userData.level % 10} // Active
-          </span>
-        </div>
-      </div>
-    </div>
+    </BrowserRouter>
   );
 }
