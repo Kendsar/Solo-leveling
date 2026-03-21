@@ -22,7 +22,7 @@ export function GoalsPanel({ goals }: GoalsPanelProps) {
     >
       <div className="flex items-center gap-3 mb-6">
         <Target className="w-5 h-5 text-fuchsia-400" />
-        <h2 className="text-lg text-fuchsia-100 uppercase tracking-wider">Active Directives</h2>
+        <h2 className="text-lg text-fuchsia-100 uppercase tracking-wider">Active Quests</h2>
         <div className="flex-1 h-[1px] bg-gradient-to-r from-fuchsia-400/30 to-transparent" />
       </div>
 
@@ -40,7 +40,7 @@ export function GoalsPanel({ goals }: GoalsPanelProps) {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-fuchsia-400/80 to-transparent" />
-              
+
               <div className="flex justify-between items-start mb-4 pl-2">
                 <h3 className="text-sm text-fuchsia-100 font-medium tracking-wide">{goal.title}</h3>
                 <div className="flex items-center gap-1 bg-fuchsia-500/10 px-2 py-1 rounded border border-fuchsia-500/20">
@@ -54,7 +54,7 @@ export function GoalsPanel({ goals }: GoalsPanelProps) {
                   <span className="text-fuchsia-400/60 uppercase tracking-widest text-[10px]">Completion</span>
                   <span className="text-fuchsia-300 font-mono">{goal.progress} / {goal.target}</span>
                 </div>
-                
+
                 <div className="h-1.5 w-full bg-slate-950/80 rounded-full overflow-hidden border border-fuchsia-500/20">
                   <motion.div
                     className="h-full bg-gradient-to-r from-fuchsia-600 to-fuchsia-400 relative"

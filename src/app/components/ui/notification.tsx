@@ -8,7 +8,7 @@ const SoloLevelingNotification = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-[#0a0f1c]">
             {/* Outer Glow Frame */}
-            <div className="relative p-[2px] rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 animate-pulse shadow-[0_0_40px_rgba(0,255,255,0.4)]">
+            <div style={{ display: 'inline-flex', width: '90%', height: 'auto', maxWidth: '424px' }} className="relative p-[2px] rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 animate-pulse shadow-[0_0_40px_rgba(0,255,255,0.4)]">
 
                 {/* Main Panel */}
                 <div className="relative w-[420px] h-[260px] rounded-xl bg-[#0b1324]/90 backdrop-blur-md border border-cyan-400/30 overflow-hidden">
@@ -62,7 +62,7 @@ const SoloLevelingNotification = () => {
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

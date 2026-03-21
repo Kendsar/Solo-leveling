@@ -1,7 +1,7 @@
 
-  # Shadow Arena
+  # Awakened System
 
-  This is a code bundle for Shadow Arena. The original project is available at https://www.figma.com/design/il4rhak1reqZQrl3b0J5LX/Futuristic-Gamified-Dashboard-UI.
+  This is a code bundle for Awakened System. The original project is available at https://www.figma.com/design/il4rhak1reqZQrl3b0J5LX/Futuristic-Gamified-Dashboard-UI.
 
   ## Running the code
 

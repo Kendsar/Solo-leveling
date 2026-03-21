@@ -127,8 +127,8 @@ export function processUserData() {
   const energyLevel = Math.min(100, Math.max(50, baseEnergy + todayBonus));
 
   // Resolve the current profile picture utilizing the swappable interface layer
-  const avatarUrl = data.user.profilePicturePath 
-    ? avatarService.getAvatarUrl(data.user.profilePicturePath) 
+  const avatarUrl = data.user.profilePicturePath
+    ? avatarService.getAvatarUrl(data.user.profilePicturePath)
     : (data.user.profilePicture !== 'link' && data.user.profilePicture ? data.user.profilePicture : null);
 
   return {

@@ -1,15 +1,15 @@
 import { motion } from "motion/react";
 import { NavLink, useLocation } from "react-router";
-import { 
-  Home, 
-  Map, 
-  Swords, 
-  TrendingUp, 
-  BarChart2, 
-  Trophy, 
-  Gift, 
-  Award, 
-  Settings, 
+import {
+  Home,
+  Map,
+  Swords,
+  TrendingUp,
+  BarChart2,
+  Trophy,
+  Gift,
+  Award,
+  Settings,
   Lock,
   X
 } from "lucide-react";
@@ -24,7 +24,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "Home", path: "/", icon: Home },
   { name: "Quests", path: "/quests", icon: Map },
-  { name: "Training", path: "/training", icon: Swords },
+  { name: "Workouts", path: "/workouts", icon: Swords },
   { name: "Progression", path: "/progression", icon: TrendingUp, locked: true },
   { name: "Stats", path: "/stats", icon: BarChart2 },
   { name: "Ranking", path: "/ranking", icon: Trophy, locked: true },
@@ -44,7 +44,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     <>
       {/* Mobile Backdrop Overlay */}
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -74,7 +74,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <button onClick={onClose} className="md:hidden text-cyan-500/50 hover:text-cyan-400 transition-colors p-2 z-10">
             <X size={24} />
           </button>
-          
+
           <div className="absolute bottom-0 left-6 right-6 h-[1px] bg-gradient-to-r from-cyan-500/30 to-transparent" />
         </div>
 
@@ -111,7 +111,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {isActive && !item.locked && (
                   <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-400 rounded-r shadow-[0_0_10px_rgba(34,211,238,0.8)] pointer-events-none" />
                 )}
-                
+
                 <div className="relative z-10 flex-shrink-0">
                   {item.locked ? (
                     <Lock className="w-5 h-5 text-slate-500" />
@@ -119,7 +119,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <Icon className={`w-5 h-5 transition-all duration-300 ${isActive ? 'text-cyan-300 filter drop-shadow-[0_0_5px_rgba(34,211,238,0.5)] scale-110' : 'text-cyan-400/60 group-hover:text-cyan-400 group-hover:scale-110'}`} />
                   )}
                 </div>
-                
+
                 <span className={`relative z-10 text-sm tracking-wide transition-colors duration-300 ${item.locked ? 'text-slate-500 uppercase text-xs font-semibold tracking-widest' : isActive ? 'text-cyan-50 font-bold uppercase tracking-wider text-xs' : 'text-cyan-100/70 group-hover:text-cyan-100 uppercase tracking-wider font-semibold text-xs'}`}>
                   {item.name}
                 </span>
