@@ -193,6 +193,8 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
     } else if (workout.done) {
       status = "completed";
     }
+    const dayDate = new Date(workout.dayDate);
+    dayDate.setHours(0, 0, 0, 0);
 
     return {
       day: workout.day, // already provided
@@ -208,7 +210,7 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
         completed: ex.completed,
         details: formatExerciseDetails(ex),
       })),
-
+      isToday: dayDate.getTime() === today.getTime(),
       isCurrentOrFuture: workoutDate >= today,
       isDisabled: workout.disabled,
     };
@@ -238,7 +240,7 @@ function formatExerciseDetails(ex: any): string {
 export function processWeeklyData() {
   const data = getHunterData();
   // Using the system date as context
-  const today = new Date('2026-03-20');
+  const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   return data.dailyWorkouts.map((day) => {
@@ -302,6 +304,7 @@ export function processWeeklyData() {
       status,
       completionRate: day.doughnutProgress,
       exercises,
+      isToday: isToday,
       isCurrentOrFuture: isToday || isFuture,
       isDisabled: isPast
     };
