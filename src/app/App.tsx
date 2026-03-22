@@ -9,6 +9,7 @@ import { Menu } from "lucide-react";
 
 import { GoalsPanel } from "./components/GoalsPanel";
 import { processGoalsData } from "./utils/processHunterData";
+import AuthSystemPanel from "./components/ui/authSystemPanel";
 
 
 export default function App() {
@@ -62,11 +63,13 @@ export default function App() {
 
           <div className="container mx-auto px-4 md:px-6 py-6 md:py-8 max-w-[1600px] flex-1">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/auth" element={<AuthSystemPanel />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/quests" element={<GoalsPanel goals={goalsData} />} />
               <Route path="/workouts" element={<PlaceholderPage title="Workouts" />} />
               <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
               <Route path="/achievements" element={<AchievementsPage />} />
+              <Route path="/ranking" element={<PlaceholderPage title="Ranking" />} />
               <Route path="/system" element={<SoloLevelingNotification />} />
               {/* Catch-all for undefined or locked routes */}
               <Route path="*" element={<Navigate to="/" replace />} />

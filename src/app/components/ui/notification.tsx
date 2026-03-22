@@ -38,7 +38,7 @@ const SoloLevelingNotification = () => {
                         {/* Item 1 */}
                         <div className="flex items-center justify-between">
                             <span className="opacity-80">
-                                • You've become a Player.
+                                • Congratulations on becoming a Player.
                             </span>
                             <div className="w-3 h-3 border border-cyan-400 rounded-sm"></div>
                         </div>

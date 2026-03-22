@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { NavLink, useLocation } from "react-router";
 import {
   Home,
+  LayoutDashboard,
   Map,
   Swords,
   TrendingUp,
@@ -22,12 +23,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: "Home", path: "/", icon: Home },
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
   { name: "Quests", path: "/quests", icon: Map },
   { name: "Workouts", path: "/workouts", icon: Swords },
   { name: "Progression", path: "/progression", icon: TrendingUp, locked: true },
   { name: "Stats", path: "/stats", icon: BarChart2 },
-  { name: "Ranking", path: "/ranking", icon: Trophy, locked: true },
+  { name: "Ranking", path: "/ranking", icon: Trophy},
   { name: "Rewards", path: "/rewards", icon: Gift, locked: true },
   { name: "Achievements", path: "/achievements", icon: Award },
 ];
