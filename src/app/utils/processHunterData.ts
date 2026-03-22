@@ -14,6 +14,7 @@
  */
 
 import hunterData from '../../imports/pasted_text/user-data.json';
+import { DayData } from '../components/WeeklyGrid';
 import { avatarService } from '../services/AvatarService';
 
 export type ExerciseType = "strength" | "cardio" | "isometric";
@@ -159,6 +160,79 @@ export function processSystemStats() {
       focus: focusScore,
     },
   };
+}
+
+export function getTodayWorkout(): DailyWorkout[] {
+  const data = getHunterData();
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return data.dailyWorkouts.filter((workout) => {
+    const workoutDate = new Date(workout.dayDate);
+    workoutDate.setHours(0, 0, 0, 0);
+    return workoutDate.getTime() === today.getTime();
+  });
+}
+
+export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return workouts.map((workout) => {
+    const workoutDate = new Date(workout.dayDate);
+    workoutDate.setHours(0, 0, 0, 0);
+
+    // 🔥 STATUS LOGIC (based on your flags)
+    let status: DayData["status"] = "upcoming";
+
+    if (workout.disabled) {
+      status = "locked";
+    } else if (workout.currentDate) {
+      status = "active";
+    } else if (workout.done) {
+      status = "completed";
+    }
+
+    return {
+      day: workout.day, // already provided
+      date: workout.dayDate,
+      title: workout.title,
+
+      status,
+
+      completionRate: workout.doughnutProgress || 0,
+
+      exercises: workout.exercises.map((ex) => ({
+        name: ex.name,
+        completed: ex.completed,
+        details: formatExerciseDetails(ex),
+      })),
+
+      isCurrentOrFuture: workoutDate >= today,
+      isDisabled: workout.disabled,
+    };
+  });
+}
+
+function formatExerciseDetails(ex: any): string {
+  if (ex.type === "strength" && ex.sets) {
+    return ex.sets
+      .map((s: any) =>
+        `${s.reps} reps${s.weight ? ` @ ${s.weight}kg` : ""}`
+      )
+      .join(" | ");
+  }
+
+  if (ex.type === "cardio") {
+    return `${ex.durationMin || 0} min • ${ex.distanceKm || 0} km`;
+  }
+
+  if (ex.type === "isometric") {
+    return `${ex.durationSec || 0} sec hold`;
+  }
+
+  return "";
 }
 
 export function processWeeklyData() {

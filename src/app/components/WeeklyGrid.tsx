@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
-import { Calendar } from "lucide-react";
-import { DayCard } from "./DayCard";
+import { motion } from 'motion/react';
+import { Calendar } from 'lucide-react';
+import { DayCard } from './DayCard';
 
 export interface ProcessedExercise {
   name: string;
@@ -12,7 +12,7 @@ export interface DayData {
   day: string;
   date: string;
   title: string;
-  status: "completed" | "active" | "upcoming" | "locked";
+  status: 'completed' | 'active' | 'upcoming' | 'locked';
   completionRate: number;
   exercises: ProcessedExercise[];
   isCurrentOrFuture: boolean;
@@ -33,6 +33,15 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
     return Math.ceil(diff / oneWeek);
   };
 
+  const isTodayView = () => {
+    if (weekData.length !== 1) return false;
+
+    const today = new Date();
+    const itemDate = new Date(weekData[0].date);
+
+    return itemDate.toDateString() === today.toDateString();
+  };
+
   return (
     <motion.div
       className="relative"
@@ -44,13 +53,29 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
       <div className="flex items-center gap-3 mb-6">
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-lg text-cyan-100 uppercase tracking-wider">Weekly Workouts</h2>
+          <h2 className="text-lg text-cyan-100 uppercase tracking-wider">
+            {isTodayView() ? "Today's Workout" : 'Weekly Workouts'}
+          </h2>
         </div>
+        {isTodayView() && (
+          <span className="text-xs text-cyan-400/70 uppercase tracking-wider">
+            {new Date(weekData[0].date).toLocaleDateString(undefined, {
+              month: 'short',
+              day: 'numeric',
+            })}
+          </span>
+        )}
+
         <div className="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/30 to-transparent" />
-        <div className="flex items-center gap-2 px-3 py-1 rounded border border-cyan-500/20 bg-slate-950/50">
-          <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50" />
-          <span className="text-xs text-cyan-400/80 uppercase tracking-wider">Week {getCurrentWeek()}</span>
-        </div>
+
+        {!isTodayView() && (
+          <div className="flex items-center gap-2 px-3 py-1 rounded border border-cyan-500/20 bg-slate-950/50">
+            <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50" />
+            <span className="text-xs text-cyan-400/80 uppercase tracking-wider">
+              Week {getCurrentWeek()}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Weekly Grid */}
