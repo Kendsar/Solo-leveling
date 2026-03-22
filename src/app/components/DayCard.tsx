@@ -200,7 +200,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
             ) : (
               <>
                 <h3 className="flex items-center gap-2 text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 to-cyan-400 flex-1">
-                  {dayData.isFuture && (
+                  {(isToday || isFuture) && (
                     <Pencil
                       className="w-4 h-4 text-cyan-400 cursor-pointer"
                       onClick={() => setIsEditingTitle(true)}
@@ -258,7 +258,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
                           </span>
                         )}
                       </div>
-                      {dayData.isFuture && editingIndex !== idx && (
+                      {(isToday || isFuture) && editingIndex !== idx && (
                         <Pencil
                           className="w-3.5 h-3.5 text-cyan-400 cursor-pointer mt-0.5"
                           onClick={() => {
@@ -278,7 +278,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
               >
                 {message}
 
-                {dayData.isToday && (
+                {isToday && (
                   <div className="mt-2 flex justify-center gap-2 relative z-10">
                     {[0, 1, 2].map((i) => (
                       <div
@@ -319,7 +319,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
           )}
 
           {/* Add Task */}
-          {isFuture && !isRestDay() ? (
+          {(isToday || isFuture) && !isRestDay() ? (
             <div className="mt-2 text-sm">
               <AnimatePresence mode="popLayout">
                 {isAddingTask ? (
