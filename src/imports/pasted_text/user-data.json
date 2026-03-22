@@ -102,7 +102,7 @@
     {
       "title": "Rest Day",
       "day": "Sun",
-      "dayDate": "2026-03-19",
+      "dayDate": "2026-03-22",
       "currentDate": false,
       "disabled": false,
       "isRestDay": true,
@@ -114,7 +114,7 @@
     {
       "title": "Push Day",
       "day": "Mon",
-      "dayDate": "2026-03-16",
+      "dayDate": "2026-03-23",
       "currentDate": false,
       "disabled": true,
       "isRestDay": false,
@@ -161,7 +161,7 @@
     {
       "title": "Running Workout",
       "day": "Tue",
-      "dayDate": "2026-03-17",
+      "dayDate": "2026-03-24",
       "currentDate": false,
       "disabled": true,
       "isRestDay": false,
@@ -181,7 +181,7 @@
     {
       "title": "Core & Hold",
       "day": "Wed",
-      "dayDate": "2026-03-18",
+      "dayDate": "2026-03-25",
       "currentDate": true,
       "disabled": false,
       "isRestDay": false,
@@ -216,7 +216,7 @@
     {
       "title": "Rest Day",
       "day": "Thu",
-      "dayDate": "2026-03-19",
+      "dayDate": "2026-03-26",
       "currentDate": false,
       "disabled": false,
       "isRestDay": true,
@@ -228,7 +228,7 @@
     {
       "title": "Pull Day",
       "day": "Fri",
-      "dayDate": "2026-03-20",
+      "dayDate": "2026-03-27",
       "currentDate": false,
       "disabled": false,
       "isRestDay": false,
@@ -257,7 +257,7 @@
     {
       "title": "Rest Day",
       "day": "Thu",
-      "dayDate": "2026-03-19",
+      "dayDate": "2026-03-28",
       "currentDate": false,
       "disabled": false,
       "isRestDay": true,

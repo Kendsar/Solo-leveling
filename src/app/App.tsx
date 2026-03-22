@@ -8,7 +8,8 @@ import SoloLevelingNotification from "./components/ui/notification";
 import { Menu } from "lucide-react";
 
 import { GoalsPanel } from "./components/GoalsPanel";
-import { processGoalsData } from "./utils/processHunterData";
+import { WeeklyGrid } from "./components/WeeklyGrid";
+import { processGoalsData, processWeeklyData } from "./utils/processHunterData";
 import AuthSystemPanel from "./components/ui/authSystemPanel";
 
 
@@ -16,6 +17,8 @@ export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const goalsData = processGoalsData();
+  const weekData = processWeeklyData();
+  
 
   return (
     <BrowserRouter>
@@ -66,7 +69,7 @@ export default function App() {
               <Route path="/auth" element={<AuthSystemPanel />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/quests" element={<GoalsPanel goals={goalsData} />} />
-              <Route path="/workouts" element={<PlaceholderPage title="Workouts" />} />
+              <Route path="/workouts" element={<WeeklyGrid weekData={weekData} /> }/>
               <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
               <Route path="/achievements" element={<AchievementsPage />} />
               <Route path="/ranking" element={<PlaceholderPage title="Ranking" />} />
