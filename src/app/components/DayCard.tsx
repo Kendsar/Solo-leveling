@@ -215,7 +215,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
           {/* Exercises */}
           <div className="flex flex-col gap-2 mb-6">
             {!isRestDay() ? (
-              <div className="text-sm text-cyan-400/70 italic flex items-center gap-2">
+              <div className="text-sm text-cyan-400/70 italic flex gap-2" style={{ flexDirection: 'column' }}>
                 {localExercises.length === 0 ? (
                   <div className="text-xs text-cyan-400/40 italic flex-1 flex items-center justify-center py-4">
                     No tasks scheduled
