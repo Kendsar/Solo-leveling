@@ -211,7 +211,7 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
         details: formatExerciseDetails(ex),
       })),
       isToday: dayDate.getTime() === today.getTime(),
-      isCurrentOrFuture: workoutDate >= today,
+      isFuture: workoutDate > today,
       isDisabled: workout.disabled,
     };
   });
@@ -305,7 +305,7 @@ export function processWeeklyData() {
       completionRate: day.doughnutProgress,
       exercises,
       isToday: isToday,
-      isCurrentOrFuture: isToday || isFuture,
+      isFuture: isFuture,
       isDisabled: isPast
     };
   });

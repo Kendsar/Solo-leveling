@@ -16,7 +16,7 @@ export interface DayData {
   completionRate: number;
   exercises: ProcessedExercise[];
   isToday: boolean;
-  isCurrentOrFuture: boolean;
+  isFuture: boolean;
   isDisabled: boolean;
 }
 
