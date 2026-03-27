@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 import {
   Home,
   LayoutDashboard,
@@ -12,7 +13,8 @@ import {
   Award,
   Settings,
   Lock,
-  X
+  X,
+  LogOut
 } from "lucide-react";
 
 interface NavItem {
@@ -40,6 +42,14 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    onClose();
+    navigate('/auth');
+  };
 
   return (
     <>
@@ -130,8 +140,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 relative z-10 mt-auto">
+        <div className="p-4 relative z-10 mt-auto space-y-2">
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent mb-4" />
+          
           <NavLink
             to="/system"
             onClick={onClose}
@@ -151,6 +162,16 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               </>
             )}
           </NavLink>
+
+          <button
+            onClick={handleLogout}
+            className="w-full relative flex items-center gap-3 px-4 py-3 rounded-lg overflow-hidden transition-all duration-300 group cursor-pointer border border-transparent hover:bg-red-500/10 hover:border-red-500/20"
+          >
+            <LogOut className="w-5 h-5 text-red-500/60 group-hover:text-red-400 group-hover:scale-110 transition-transform" />
+            <span className="text-xs uppercase tracking-widest font-semibold text-red-500/60 group-hover:text-red-400">
+              Exit System
+            </span>
+          </button>
         </div>
       </aside>
     </>

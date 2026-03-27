@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import type { AuthCredentials, SignUpCredentials } from '../../../models/auth';
 
 const AuthSystemPanel = () => {
@@ -43,6 +44,7 @@ const AuthSystemPanel = () => {
     return null;
   };
 
+  const { login } = useAuth();
   const handleSubmit = async () => {
     const validationError = validate();
 
@@ -53,11 +55,16 @@ const AuthSystemPanel = () => {
 
     setError(null);
 
-    // 🔥 READY FOR SUPABASE
-    if (isSignUp) {
-      console.log('Register:', form);
-    } else {
-      console.log('Login:', form);
+    try {
+      if (isSignUp) {
+        console.log('Register:', form);
+        // Simply login as the registered user for mock logic
+        await login(form.email, form.password);
+      } else {
+        await login(form.email, form.password);
+      }
+    } catch (err: any) {
+      setError(err?.message || 'Authentication failed');
     }
   };
 

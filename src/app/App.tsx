@@ -11,44 +11,47 @@ import { GoalsPanel } from "./components/GoalsPanel";
 import { WeeklyGrid } from "./components/WeeklyGrid";
 import { processGoalsData, processWeeklyData } from "./utils/processHunterData";
 import AuthSystemPanel from "./components/ui/authSystemPanel";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import { ProtectedRoute, PublicRoute } from "./components/auth/RouteGuards";
 
-
-export default function App() {
+function AppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   const goalsData = processGoalsData();
   const weekData = processWeeklyData();
-  
 
   return (
-    <BrowserRouter>
-      <div className="relative min-h-screen bg-[#0a0e1a] flex overflow-hidden">
-        {/* Static Background Core */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0a0e1a] to-blue-950/30" />
+    <div className="relative min-h-screen bg-[#0a0e1a] flex overflow-hidden">
+      {/* Static Background Core */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-[#0a0e1a] to-blue-950/30" />
 
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]" />
 
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '100px 100px',
-            }}
-          />
-        </div>
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px',
+          }}
+        />
+      </div>
 
-        {/* Global Game Navigation Sidebar */}
+      {/* Global Game Navigation Sidebar - Only visible when authenticated */}
+      {isAuthenticated && (
         <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      )}
 
-        {/* Dynamic Route Viewport Wrapper */}
-        <main className="flex-1 ml-0 md:ml-64 relative z-10 h-screen overflow-y-auto no-scrollbar flex flex-col scroll-smooth">
+      {/* Dynamic Route Viewport Wrapper */}
+      <main className={`flex-1 relative z-10 h-screen overflow-y-auto no-scrollbar flex flex-col scroll-smooth ${isAuthenticated ? 'ml-0 md:ml-64' : 'ml-0'}`}>
 
-          {/* Mobile Header with Hamburger Interaction */}
+        {/* Mobile Header with Hamburger Interaction - Only visible when authenticated */}
+        {isAuthenticated && (
           <div className="md:hidden sticky top-0 z-30 bg-[#0a0f16]/90 backdrop-blur border-b border-cyan-500/20 p-4 flex items-center justify-between shadow-[0_5px_20px_rgba(0,0,0,0.5)]">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full border border-cyan-400/40 bg-gradient-to-br from-cyan-950/40 to-blue-950/40 flex items-center justify-center">
@@ -63,23 +66,42 @@ export default function App() {
               <Menu size={24} />
             </button>
           </div>
+        )}
 
-          <div className="container mx-auto px-4 md:px-6 py-6 md:py-8 max-w-[1600px] flex-1">
-            <Routes>
+        <div className="container mx-auto px-4 md:px-6 py-6 md:py-8 max-w-[1600px] flex-1">
+          <Routes>
+            {/* Public Routes */}
+            <Route element={<PublicRoute />}>
               <Route path="/auth" element={<AuthSystemPanel />} />
+            </Route>
+
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/quests" element={<GoalsPanel goals={goalsData} />} />
-              <Route path="/workouts" element={<WeeklyGrid weekData={weekData} /> }/>
+              <Route path="/workouts" element={<WeeklyGrid weekData={weekData} />} />
               <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
               <Route path="/achievements" element={<AchievementsPage />} />
               <Route path="/ranking" element={<PlaceholderPage title="Ranking" />} />
               <Route path="/system" element={<SoloLevelingNotification />} />
-              {/* Catch-all for undefined or locked routes */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-        </main>
-      </div>
-    </BrowserRouter>
+            </Route>
+
+            {/* Catch-all */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      </main>
+    </div>
   );
 }
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
