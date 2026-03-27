@@ -13,6 +13,7 @@ import { processGoalsData, processWeeklyData } from "./utils/processHunterData";
 import AuthSystemPanel from "./components/ui/authSystemPanel";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ProtectedRoute, PublicRoute } from "./components/auth/RouteGuards";
+import { ComposerPage } from "./components/composer-components/pages/ComposerPage";
 
 function AppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -81,6 +82,7 @@ function AppContent() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/quests" element={<GoalsPanel goals={goalsData} />} />
               <Route path="/workouts" element={<WeeklyGrid weekData={weekData} />} />
+              <Route path="/composer" element={<ComposerPage />} />
               <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
               <Route path="/achievements" element={<AchievementsPage />} />
               <Route path="/ranking" element={<PlaceholderPage title="Ranking" />} />
@@ -104,4 +106,4 @@ export default function App() {
       </AuthProvider>
     </BrowserRouter>
   );
-}
+}

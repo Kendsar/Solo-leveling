@@ -1,0 +1,152 @@
+[
+  {
+    "id": "bench-press",
+    "name": "Bench Press",
+    "muscleIds": ["chest", "triceps", "shoulders"]
+  },
+  {
+    "id": "incline-bench-press",
+    "name": "Incline Bench Press",
+    "muscleIds": ["chest", "shoulders", "triceps"]
+  },
+  {
+    "id": "dumbbell-flyes",
+    "name": "Dumbbell Flyes",
+    "muscleIds": ["chest"]
+  },
+  {
+    "id": "push-ups",
+    "name": "Push-ups",
+    "muscleIds": ["chest", "triceps", "shoulders"]
+  },
+  {
+    "id": "overhead-press",
+    "name": "Overhead Press",
+    "muscleIds": ["shoulders", "triceps"]
+  },
+  {
+    "id": "lateral-raises",
+    "name": "Lateral Raises",
+    "muscleIds": ["shoulders"]
+  },
+  {
+    "id": "front-raises",
+    "name": "Front Raises",
+    "muscleIds": ["shoulders"]
+  },
+  {
+    "id": "barbell-curl",
+    "name": "Barbell Curl",
+    "muscleIds": ["biceps"]
+  },
+  {
+    "id": "hammer-curl",
+    "name": "Hammer Curl",
+    "muscleIds": ["biceps", "forearms"]
+  },
+  {
+    "id": "preacher-curl",
+    "name": "Preacher Curl",
+    "muscleIds": ["biceps"]
+  },
+  {
+    "id": "tricep-dips",
+    "name": "Tricep Dips",
+    "muscleIds": ["triceps", "chest"]
+  },
+  {
+    "id": "tricep-pushdown",
+    "name": "Tricep Pushdown",
+    "muscleIds": ["triceps"]
+  },
+  {
+    "id": "skull-crushers",
+    "name": "Skull Crushers",
+    "muscleIds": ["triceps"]
+  },
+  {
+    "id": "pull-ups",
+    "name": "Pull-ups",
+    "muscleIds": ["lats", "biceps", "traps"]
+  },
+  {
+    "id": "lat-pulldown",
+    "name": "Lat Pulldown",
+    "muscleIds": ["lats", "biceps"]
+  },
+  {
+    "id": "barbell-row",
+    "name": "Barbell Row",
+    "muscleIds": ["lats", "traps", "biceps"]
+  },
+  {
+    "id": "dumbbell-row",
+    "name": "Dumbbell Row",
+    "muscleIds": ["lats", "traps", "biceps"]
+  },
+  {
+    "id": "deadlift",
+    "name": "Deadlift",
+    "muscleIds": ["lower-back", "glutes", "hamstrings", "traps"]
+  },
+  {
+    "id": "shrugs",
+    "name": "Shrugs",
+    "muscleIds": ["traps"]
+  },
+  {
+    "id": "squat",
+    "name": "Squat",
+    "muscleIds": ["quads", "glutes", "hamstrings"]
+  },
+  {
+    "id": "leg-press",
+    "name": "Leg Press",
+    "muscleIds": ["quads", "glutes"]
+  },
+  {
+    "id": "leg-extension",
+    "name": "Leg Extension",
+    "muscleIds": ["quads"]
+  },
+  {
+    "id": "leg-curl",
+    "name": "Leg Curl",
+    "muscleIds": ["hamstrings"]
+  },
+  {
+    "id": "lunges",
+    "name": "Lunges",
+    "muscleIds": ["quads", "glutes", "hamstrings"]
+  },
+  {
+    "id": "calf-raises",
+    "name": "Calf Raises",
+    "muscleIds": ["calves"]
+  },
+  {
+    "id": "crunches",
+    "name": "Crunches",
+    "muscleIds": ["abs"]
+  },
+  {
+    "id": "plank",
+    "name": "Plank",
+    "muscleIds": ["abs", "obliques"]
+  },
+  {
+    "id": "russian-twist",
+    "name": "Russian Twist",
+    "muscleIds": ["obliques", "abs"]
+  },
+  {
+    "id": "leg-raises",
+    "name": "Leg Raises",
+    "muscleIds": ["abs"]
+  },
+  {
+    "id": "cable-crunch",
+    "name": "Cable Crunch",
+    "muscleIds": ["abs"]
+  }
+]
