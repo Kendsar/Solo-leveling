@@ -19,21 +19,22 @@ export function DraggableWorkout({ workout }: DraggableWorkoutProps) {
   return (
     <motion.div
       ref={drag}
-      initial={{ opacity: 0, scale: 0.95 }}
       animate={{
-        opacity: isDragging ? 0.5 : 1,
-        scale: isDragging ? 0.95 : 1
+        opacity: isDragging ? 0.4 : 1,
+        scale: isDragging ? 0.96 : 1,
       }}
       whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-      className="border rounded-lg p-3 cursor-move bg-white hover:shadow-md transition-shadow"
+      transition={{ duration: 0.15 }}
+      className="bg-slate-950/70 border border-cyan-500/15 hover:border-cyan-500/40 hover:bg-cyan-950/20 rounded-lg p-3 cursor-grab active:cursor-grabbing transition-colors duration-200 group"
     >
       <div className="flex items-center gap-2">
-        <Dumbbell className="size-4 text-gray-600" />
-        <div>
-          <h4 className="font-medium text-sm">{workout.name}</h4>
-          <p className="text-xs text-gray-500">
-            {workout.exercises.length} exercise{workout.exercises.length !== 1 ? 's' : ''}
+        <div className="p-1 rounded bg-cyan-500/10 border border-cyan-400/20 flex-shrink-0">
+          <Dumbbell className="w-3 h-3 text-cyan-400" />
+        </div>
+        <div className="min-w-0">
+          <h4 className="text-xs text-cyan-100 font-medium truncate">{workout.name}</h4>
+          <p className="text-[10px] text-cyan-400/40 font-mono">
+            {workout.exercises.length} ex{workout.exercises.length !== 1 ? '' : ''}
           </p>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { motion } from 'motion/react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { DayCard } from './DayCard';
 import { DraggableWorkout } from './DraggableWorkout';
@@ -11,7 +10,6 @@ export function WeeklyPlanner() {
   const { weeklyPlan, updateDayPlan, workouts } = useWorkout();
 
   const handleDrop = (workout: Workout, dayIndex: number) => {
-    // Create a deep copy of the workout (snapshot)
     const workoutCopy: Workout = JSON.parse(JSON.stringify(workout));
     updateDayPlan(dayIndex, { workout: workoutCopy, restDay: false });
   };
@@ -36,21 +34,26 @@ export function WeeklyPlanner() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CalendarIcon className="size-5" />
-              Weekly Planner
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+        <div className="relative border border-cyan-500/20 bg-gradient-to-br from-slate-950/80 to-slate-900/80 backdrop-blur-xl rounded-xl p-6 overflow-hidden">
+          {/* Top glow */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-6">
+            <CalendarIcon className="w-4 h-4 text-cyan-400" />
+            <span className="text-xs text-cyan-400/70 uppercase tracking-widest">Weekly Planner</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/30 to-transparent" />
+          </div>
+
+          <div className="space-y-6">
+            {/* Available Workouts — drag source */}
             <div>
-              <h3 className="font-semibold text-sm text-gray-600 mb-3">
-                Available Workouts (Drag to Schedule)
-              </h3>
-              <div className="max-h-40 overflow-y-auto border rounded-lg p-3 bg-gray-50">
+              <p className="text-[10px] text-cyan-400/50 uppercase tracking-widest mb-3">
+                Available Workouts — Drag to Schedule
+              </p>
+              <div className="bg-slate-950/50 border border-cyan-500/10 rounded-lg p-3 min-h-[4rem]">
                 {workouts.length === 0 ? (
-                  <p className="text-sm text-gray-500 text-center py-4">
+                  <p className="text-xs text-cyan-400/30 text-center py-4 font-mono">
                     Create workouts above to schedule them
                   </p>
                 ) : (
@@ -63,8 +66,11 @@ export function WeeklyPlanner() {
               </div>
             </div>
 
+            {/* Week grid */}
             <div>
-              <h3 className="font-semibold text-sm text-gray-600 mb-3">This Week</h3>
+              <p className="text-[10px] text-cyan-400/50 uppercase tracking-widest mb-3">
+                This Week
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
                 {weeklyPlan.map((day, index) => (
                   <DayCard
@@ -78,8 +84,11 @@ export function WeeklyPlanner() {
                 ))}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Bottom glow */}
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
+        </div>
       </motion.div>
     </DndProvider>
   );

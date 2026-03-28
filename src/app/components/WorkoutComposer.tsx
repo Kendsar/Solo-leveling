@@ -1,9 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Plus } from 'lucide-react';
+import { Plus, Dumbbell } from 'lucide-react';
 import { MuscleVisualization } from './composer-components/MuscleVisualization';
 import { ExerciseSelector } from './composer-components/ExerciseSelector';
 import { ExerciseItem } from './composer-components/ExerciseItem';
@@ -92,72 +89,108 @@ export function WorkoutComposer() {
             transition={{ duration: 0.5 }}
         >
             <div className="grid md:grid-cols-[300px_1fr] gap-6">
+                {/* Muscle Visualization */}
                 <div>
                     <MuscleVisualization highlightedMuscles={highlightedMuscles} />
                 </div>
 
-                <div className="relative border border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 to-emerald-900/20 backdrop-blur-sm rounded-xl p-12 max-w-lg w-full text-center overflow-hidden">
+                {/* Composer Panel */}
+                <div className="relative border border-cyan-500/20 bg-gradient-to-br from-slate-950/80 to-slate-900/80 backdrop-blur-xl rounded-xl p-6 overflow-hidden">
+                    {/* Top glow line */}
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+
                     {!isCreating ? (
                         <>
-                            <div className="text-md text-cyan-100 uppercase tracking-wider mb-10"> Saved Workouts </div>
-                            <div >
-                                {workouts.length === 0 ? (
-                                    <p className="text-sm text-gray-500">No workouts created yet</p>
-                                ) : (
-                                    <div className="grid gap-2">
-                                        {workouts.map((workout) => (
-                                            <div
-                                                key={workout.id}
-                                                onClick={() => handleEditWorkout(workout)}
-                                                className="flex items-start gap-3 bg-slate-950/40 p-2.5 rounded border border-cyan-500/10 hover:border-cyan-500/30 transition-colors cursor-pointer"
-                                            >
-                                                <div className="flex items-center justify-between cursor-pointer" style={{ textAlign: 'start' }}>
-                                                    <div className='flex flex-col flex-1'>
-                                                        <span className='text-cyan-50'>
-                                                            {workout.name}
-                                                        </span>
-                                                        <p className="text-sm text-gray-500">
-                                                            {workout.exercises.length} exercise
-                                                            {workout.exercises.length !== 1 ? 's' : ''}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
+                            {/* Section header */}
+                            <div className="flex items-center gap-3 mb-6">
+                                <Dumbbell className="w-4 h-4 text-cyan-400" />
+                                <span className="text-xs text-cyan-400/70 uppercase tracking-widest">Saved Workouts</span>
+                                <div className="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/30 to-transparent" />
                             </div>
+
+                            {workouts.length === 0 ? (
+                                <p className="text-sm text-cyan-400/30 text-center py-6 font-mono">
+                                    No workouts created yet
+                                </p>
+                            ) : (
+                                <div className="grid gap-2 mb-6">
+                                    {workouts.map((workout) => (
+                                        <motion.div
+                                            key={workout.id}
+                                            onClick={() => handleEditWorkout(workout)}
+                                            className="flex items-center gap-3 bg-slate-950/50 p-3 rounded-lg border border-cyan-500/10 hover:border-cyan-500/30 hover:bg-cyan-950/20 transition-all duration-200 cursor-pointer group"
+                                            whileHover={{ x: 2 }}
+                                            transition={{ duration: 0.15 }}
+                                        >
+                                            <div className="p-1.5 rounded bg-cyan-500/10 border border-cyan-400/20">
+                                                <Dumbbell className="w-3.5 h-3.5 text-cyan-400" />
+                                            </div>
+                                            <div className="flex flex-col flex-1 text-start">
+                                                <span className="text-cyan-50 text-sm font-medium">
+                                                    {workout.name}
+                                                </span>
+                                                <span className="text-xs text-cyan-400/40 font-mono">
+                                                    {workout.exercises.length} exercise{workout.exercises.length !== 1 ? 's' : ''}
+                                                </span>
+                                            </div>
+                                            <span className="text-[10px] text-cyan-400/30 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+                                                Edit
+                                            </span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            )}
 
                             <motion.button
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="w-full py-2 flex items-center justify-center mt-10 gap-2 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs uppercase tracking-wider hover:bg-cyan-500/20 transition-colors group"
+                                className="w-full py-2.5 flex items-center justify-center gap-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs uppercase tracking-wider hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-200 group"
                                 onClick={() => setIsCreating(true)}
                             >
-                                <Plus className="group-hover:scale-110 transition-transform" />{' '}
+                                <Plus className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                                 Create New Workout
                             </motion.button>
                         </>
                     ) : (
-                        <div className="max-w-lg w-full text-center overflow-hidden">
-                            <input
-                                type="text"
-                                placeholder="Workout Name"
-                                value={workoutName}
-                                onChange={(e) => setWorkoutName(e.target.value)}
-                                className="w-full bg-slate-900 border border-slate-700 rounded mb-5 px-2.5 py-1.5 text-xs text-cyan-50 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
-                                autoFocus
-                            />
+                        <div className="space-y-5">
+                            {/* Workout name input */}
+                            <div>
+                                <label className="block text-[10px] text-cyan-400/60 uppercase tracking-widest mb-2">
+                                    Workout Name
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Push Day A"
+                                    value={workoutName}
+                                    onChange={(e) => setWorkoutName(e.target.value)}
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-cyan-50 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 transition-colors"
+                                    autoFocus
+                                />
+                            </div>
 
-                            <ExerciseSelector
-                                onSelect={handleSelectExercise}
-                                onHover={setHoveredExerciseId}
-                            />
+                            {/* Exercise selector */}
+                            <div>
+                                <label className="block text-[10px] text-cyan-400/60 uppercase tracking-widest mb-2">
+                                    Add Exercises
+                                </label>
+                                <ExerciseSelector
+                                    onSelect={handleSelectExercise}
+                                    onHover={setHoveredExerciseId}
+                                />
+                            </div>
 
+                            {/* Selected exercises */}
                             {currentWorkout.length > 0 && (
-                                <div className="space-y-3">
-                                    <h3 className="font-semibold text-sm text-gray-600">Exercises</h3>
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[10px] text-cyan-400/60 uppercase tracking-widest">
+                                            Exercises
+                                        </span>
+                                        <span className="text-[10px] font-mono text-cyan-400/30 ml-auto">
+                                            {currentWorkout.length} added
+                                        </span>
+                                    </div>
                                     {currentWorkout.map((we) => (
                                         <ExerciseItem
                                             key={we.id}
@@ -170,20 +203,27 @@ export function WorkoutComposer() {
                                 </div>
                             )}
 
-                            <div className="flex gap-2">
-                                <Button
+                            {/* Action buttons */}
+                            <div className="flex gap-2 pt-2">
+                                <button
                                     onClick={handleSaveWorkout}
                                     disabled={!workoutName.trim() || currentWorkout.length === 0}
-                                    className="flex-1"
+                                    className="flex-1 py-2 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs uppercase tracking-wider hover:bg-cyan-500/30 hover:border-cyan-500/60 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
                                     {editingId ? 'Update Workout' : 'Save Workout'}
-                                </Button>
-                                <Button variant="outline" onClick={handleCancelEdit}>
+                                </button>
+                                <button
+                                    onClick={handleCancelEdit}
+                                    className="px-4 py-2 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-400 text-xs uppercase tracking-wider hover:bg-slate-800 hover:text-slate-300 transition-all duration-200"
+                                >
                                     Cancel
-                                </Button>
+                                </button>
                             </div>
                         </div>
                     )}
+
+                    {/* Bottom glow line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
                 </div>
             </div>
         </motion.div>
