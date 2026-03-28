@@ -1,0 +1,16 @@
+[
+  { "id": "chest", "label": "Chest", "group": "upper" },
+  { "id": "shoulders", "label": "Shoulders", "group": "upper" },
+  { "id": "biceps", "label": "Biceps", "group": "upper" },
+  { "id": "triceps", "label": "Triceps", "group": "upper" },
+  { "id": "forearms", "label": "Forearms", "group": "upper" },
+  { "id": "abs", "label": "Abs", "group": "core" },
+  { "id": "obliques", "label": "Obliques", "group": "core" },
+  { "id": "lats", "label": "Lats", "group": "back" },
+  { "id": "traps", "label": "Traps", "group": "back" },
+  { "id": "lower-back", "label": "Lower Back", "group": "back" },
+  { "id": "quads", "label": "Quadriceps", "group": "legs" },
+  { "id": "hamstrings", "label": "Hamstrings", "group": "legs" },
+  { "id": "glutes", "label": "Glutes", "group": "legs" },
+  { "id": "calves", "label": "Calves", "group": "legs" }
+]

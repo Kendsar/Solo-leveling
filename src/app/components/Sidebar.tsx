@@ -26,11 +26,11 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-  { name: "Quests", path: "/quests", icon: Map },
   { name: "Workouts", path: "/workouts", icon: Swords },
+  { name: "Workout Composer", path: "/composer", icon: Map },
   { name: "Progression", path: "/progression", icon: TrendingUp, locked: true },
   { name: "Stats", path: "/stats", icon: BarChart2 },
-  { name: "Ranking", path: "/ranking", icon: Trophy},
+  { name: "Ranking", path: "/ranking", icon: Trophy },
   { name: "Rewards", path: "/rewards", icon: Gift, locked: true },
   { name: "Achievements", path: "/achievements", icon: Award },
 ];
@@ -76,10 +76,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Header/Logo */}
         <div className="p-6 relative pt-8 md:pt-10 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 tracking-widest uppercase filter drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">
+            <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 tracking-widest uppercase filter drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">
               Hunter
-            </h1>
-            <p className="text-[10px] text-cyan-400/50 uppercase tracking-[0.3em] mt-1 font-mono">System OS</p>
+            </h2>
+            <p className="text-[10px] text-cyan-400/50 uppercase tracking-[0.3em] mt-1 font-mono">Solo Leveling</p>
           </div>
           {/* Mobile Close Button */}
           <button onClick={onClose} className="md:hidden text-cyan-500/50 hover:text-cyan-400 transition-colors p-2 z-10">
@@ -142,7 +142,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Bottom Section */}
         <div className="p-4 relative z-10 mt-auto space-y-2">
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent mb-4" />
-          
+
           <NavLink
             to="/system"
             onClick={onClose}
@@ -157,7 +157,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 )}
                 <Settings className={`w-5 h-5 transition-transform duration-500 ${isActive ? 'text-slate-300 rotate-90' : 'text-slate-500 group-hover:text-slate-400 group-hover:rotate-45'}`} />
                 <span className={`text-xs uppercase tracking-widest font-semibold transition-colors duration-300 ${isActive ? 'text-slate-200' : 'text-slate-500 group-hover:text-slate-400'}`}>
-                  System OS
+                  Solo Leveling
                 </span>
               </>
             )}

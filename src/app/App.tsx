@@ -13,6 +13,7 @@ import { processGoalsData, processWeeklyData } from "./utils/processHunterData";
 import AuthSystemPanel from "./components/ui/authSystemPanel";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ProtectedRoute, PublicRoute } from "./components/auth/RouteGuards";
+import { ComposerPage } from "./components/composer-components/pages/ComposerPage";
 
 function AppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,7 +58,7 @@ function AppContent() {
               <div className="w-8 h-8 rounded-full border border-cyan-400/40 bg-gradient-to-br from-cyan-950/40 to-blue-950/40 flex items-center justify-center">
                 <div className="w-4 h-4 rounded-sm shadow-[0_0_10px_rgba(34,211,238,0.8)] border-2 border-cyan-400 bg-cyan-950/50" />
               </div>
-              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 tracking-widest uppercase text-sm filter drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">Hunter OS</span>
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 tracking-widest uppercase text-sm filter drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">Solo Leveling</span>
             </div>
             <button
               onClick={() => setIsSidebarOpen(true)}
@@ -79,7 +80,7 @@ function AppContent() {
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/quests" element={<GoalsPanel goals={goalsData} />} />
+              <Route path="/composer" element={<ComposerPage />} />
               <Route path="/workouts" element={<WeeklyGrid weekData={weekData} />} />
               <Route path="/stats" element={<PlaceholderPage title="Stats" />} />
               <Route path="/achievements" element={<AchievementsPage />} />
@@ -104,4 +105,4 @@ export default function App() {
       </AuthProvider>
     </BrowserRouter>
   );
-}
+}

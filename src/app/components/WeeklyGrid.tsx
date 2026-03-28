@@ -1,27 +1,12 @@
 import { motion } from 'motion/react';
 import { Calendar } from 'lucide-react';
-import { DayCard } from './DayCard';
-
-export interface ProcessedExercise {
-  name: string;
-  completed: boolean;
-  details: string;
-}
-
-export interface DayData {
-  day: string;
-  date: string;
-  title: string;
-  status: 'completed' | 'active' | 'upcoming' | 'locked';
-  completionRate: number;
-  exercises: ProcessedExercise[];
-  isToday: boolean;
-  isFuture: boolean;
-  isDisabled: boolean;
-}
+import { WorkoutCard } from './WorkoutCard';
+import { GoalsPanel } from './GoalsPanel';
+import { processGoalsData } from '../utils/processHunterData';
+import { WorkoutData } from '../types/workout';
 
 interface WeeklyGridProps {
-  weekData: DayData[];
+  weekData: WorkoutData[];
 }
 
 export function WeeklyGrid({ weekData }: WeeklyGridProps) {
@@ -33,6 +18,8 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
     const oneWeek = 1000 * 60 * 60 * 24 * 7;
     return Math.ceil(diff / oneWeek);
   };
+
+  const goalsData = processGoalsData();
 
   const isTodayView = () => {
     if (weekData.length !== 1) return false;
@@ -82,13 +69,14 @@ export function WeeklyGrid({ weekData }: WeeklyGridProps) {
       {/* Weekly Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {weekData.map((dayData, index) => (
-          <DayCard
+          <WorkoutCard
             key={dayData.day}
             dayData={dayData}
             delay={0.5 + index * 0.1}
           />
         ))}
       </div>
+      <GoalsPanel goals={goalsData} />
     </motion.div>
   );
 }
