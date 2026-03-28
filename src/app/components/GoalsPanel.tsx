@@ -20,7 +20,7 @@ export function GoalsPanel({ goals }: GoalsPanelProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
     >
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-6 pt-3">
         <Target className="w-5 h-5 text-fuchsia-400" />
         <h2 className="text-lg text-fuchsia-100 uppercase tracking-wider">Active Quests</h2>
         <div className="flex-1 h-[1px] bg-gradient-to-r from-fuchsia-400/30 to-transparent" />

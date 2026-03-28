@@ -13,27 +13,10 @@
  *    - processWeeklyData() -> WeeklyGrid props
  */
 
+import { Cpu } from 'lucide-react';
 import hunterData from '../../imports/pasted_text/user-data.json';
-import { DayData } from '../components/WeeklyGrid';
+import { WorkoutData, Exercise, ExerciseSet, ExerciseType } from '../types/workout';
 import { avatarService } from '../services/AvatarService';
-
-export type ExerciseType = "strength" | "cardio" | "isometric";
-
-export interface ExerciseSet {
-  reps?: number;
-  weight?: number; // kg
-  durationSec?: number; // for holds if needed per set
-}
-
-export interface Exercise {
-  name: string;
-  type: ExerciseType;
-  sets?: ExerciseSet[]; // for strength / hybrid
-  durationSec?: number; // isometric (plank, wall sit)
-  durationMin?: number; // cardio
-  distanceKm?: number; // optional cardio metric
-  completed: boolean;
-}
 
 export interface DailyWorkout {
   title: string; // "Wed - Push Day"
@@ -175,7 +158,7 @@ export function getTodayWorkout(): DailyWorkout[] {
   });
 }
 
-export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
+export function mapWorkoutToDayData(workouts: DailyWorkout[]): WorkoutData[] {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -184,7 +167,7 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
     workoutDate.setHours(0, 0, 0, 0);
 
     // 🔥 STATUS LOGIC (based on your flags)
-    let status: DayData["status"] = "upcoming";
+    let status: WorkoutData["status"] = "upcoming";
 
     if (workout.disabled) {
       status = "locked";
@@ -206,9 +189,9 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
       completionRate: workout.doughnutProgress || 0,
 
       exercises: workout.exercises.map((ex) => ({
+        ...ex,
         name: ex.name,
         completed: ex.completed,
-        details: formatExerciseDetails(ex),
       })),
       isToday: dayDate.getTime() === today.getTime(),
       isFuture: workoutDate > today,
@@ -217,42 +200,22 @@ export function mapWorkoutToDayData(workouts: DailyWorkout[]): DayData[] {
   });
 }
 
-function formatExerciseDetails(ex: any): string {
-  if (ex.type === "strength" && ex.sets) {
-    return ex.sets
-      .map((s: any) =>
-        `${s.reps} reps${s.weight ? ` @ ${s.weight}kg` : ""}`
-      )
-      .join(" | ");
-  }
-
-  if (ex.type === "cardio") {
-    return `${ex.durationMin || 0} min • ${ex.distanceKm || 0} km`;
-  }
-
-  if (ex.type === "isometric") {
-    return `${ex.durationSec || 0} sec hold`;
-  }
-
-  return "";
-}
-
-export function processWeeklyData() {
+export function processWeeklyData(): WorkoutData[] {
   const data = getHunterData();
   // Using the system date as context
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  return data.dailyWorkouts.map((day) => {
-    const dayDate = new Date(day.dayDate);
+  return data.dailyWorkouts.map((dayWorkout) => {
+    const dayDate = new Date(dayWorkout.dayDate);
     dayDate.setHours(0, 0, 0, 0);
     const isPast = dayDate < today;
     const isToday = dayDate.getTime() === today.getTime();
     const isFuture = dayDate > today;
 
     // Determine status
-    let status: "completed" | "active" | "upcoming" | "locked";
-    if (day.done) {
+    let status: WorkoutData["status"] = "upcoming";
+    if (dayWorkout.done) {
       status = "completed";
     } else if (isPast) {
       status = "locked";
@@ -269,41 +232,19 @@ export function processWeeklyData() {
     const dateStr = `${dd}/${mm}/${yyyy}`;
 
     // Extract title (e.g., "Mon - Push Day" -> "Push Day Workout")
-    const titleParts = day.title.split(' - ');
-    let title = titleParts.length > 1 ? titleParts[1] : day.title;
+    const titleParts = dayWorkout.title.split(' - ');
+    let title = titleParts.length > 1 ? titleParts[1] : dayWorkout.title;
     if (!title.toLowerCase().includes('workout') && !title.toLowerCase().includes('rest')) {
       title += ' Workout';
     }
 
-    // Process exercises for display
-    const exercises = day.exercises.map(ex => {
-      let details = "";
-      if (ex.sets && ex.sets.length > 0) {
-        const numSets = ex.sets.length;
-        const avgReps = Math.round(ex.sets.reduce((sum, s) => sum + (s.reps || 0), 0) / numSets);
-        const maxWeight = Math.max(...ex.sets.map(s => s.weight || 0));
-        details = `(${numSets} sets - ${avgReps} reps)`;
-        if (maxWeight > 0) details += ` (${maxWeight}Kg)`;
-      } else if (ex.durationMin) {
-        details = `(${ex.durationMin} min)`;
-        if (ex.distanceKm) details += ` (${ex.distanceKm}Km)`;
-      } else if (ex.durationSec) {
-        details = `(${ex.durationSec} sec)`;
-      }
-      return {
-        name: ex.name,
-        completed: ex.completed,
-        details
-      };
-    });
-
     return {
-      day: getDayName(day.day),
+      day: getDayName(dayWorkout.day),
       date: dateStr,
       title,
       status,
-      completionRate: day.doughnutProgress,
-      exercises,
+      completionRate: dayWorkout.doughnutProgress,
+      exercises: dayWorkout.exercises,
       isToday: isToday,
       isFuture: isFuture,
       isDisabled: isPast

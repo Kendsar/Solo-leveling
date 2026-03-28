@@ -11,7 +11,7 @@ import {
   Save,
   Pencil,
 } from 'lucide-react';
-import { DayData, ProcessedExercise } from './WeeklyGrid';
+import { WorkoutData, Exercise } from '../types/workout';
 import MOCK from '../../imports/pasted_text/mock-data.json';
 
 export function getWorkoutOptions(): string[] {
@@ -19,11 +19,11 @@ export function getWorkoutOptions(): string[] {
 }
 
 interface DayCardProps {
-  dayData: DayData;
+  dayData: WorkoutData;
   delay?: number;
 }
 
-export function DayCard({ dayData, delay = 0 }: DayCardProps) {
+export function WorkoutCard({ dayData, delay = 0 }: DayCardProps) {
   const {
     day,
     date,
@@ -40,7 +40,7 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
 
   const [localExercises, setLocalExercises] =
-    useState<ProcessedExercise[]>(exercises);
+    useState<Exercise[]>(exercises);
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -106,10 +106,13 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
     if (sets || reps) details = `(${sets || 0} sets - ${reps || 0} reps)`;
     if (weight) details += ` (${weight}${isLbs ? 'lbs' : 'Kg'})`;
 
-    const newTask: ProcessedExercise = {
+    const newTask: Exercise = {
+      id: '',
+      exerciseId: '',
+      type: '',
+      sets: [],
       name: newTaskName,
       completed: false,
-      details: details.trim(),
     };
     setLocalExercises([...localExercises, newTask]);
     setIsAddingTask(false);
@@ -252,9 +255,9 @@ export function DayCard({ dayData, delay = 0 }: DayCardProps) {
                             {ex.name}
                           </span>
                         )}
-                        {ex.details && (
+                        {ex.sets && (
                           <span className="text-[10px] text-cyan-400/60 font-mono mt-0.5">
-                            {ex.details}
+                            {ex.sets.map((set) => `${set.reps} reps x ${set.weight}kg`).join(', ')}
                           </span>
                         )}
                       </div>

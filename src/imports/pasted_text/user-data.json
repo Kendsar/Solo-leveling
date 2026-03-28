@@ -100,13 +100,47 @@
   ],
   "dailyWorkouts": [
     {
-      "title": "Rest Day",
+      "title": "Push Day",
       "day": "Sun",
       "dayDate": "2026-03-22",
       "currentDate": false,
       "disabled": false,
       "isRestDay": true,
-      "exercises": [],
+      "exercises": [
+        {
+          "id": "we-1774655521724",
+          "exerciseId": "bench-press",
+          "name": "Bench Press",
+          "type": "strength",
+          "completed": true,
+          "sets": [
+            {
+              "id": "set-1774655523643",
+              "reps": 20,
+              "weight": 20,
+              "unit": "kg"
+            },
+            {
+              "id": "set-1774655533153",
+              "reps": 15,
+              "weight": 40,
+              "unit": "kg"
+            },
+            {
+              "id": "set-1774655541683",
+              "reps": 12,
+              "weight": 50,
+              "unit": "kg"
+            },
+            {
+              "id": "set-1774655555221",
+              "reps": 8,
+              "weight": 60,
+              "unit": "kg"
+            }
+          ]
+        }
+      ],
       "done": true,
       "doughnutProgress": 100,
       "xpEarned": 10
@@ -120,38 +154,73 @@
       "isRestDay": false,
       "exercises": [
         {
+          "id": "we-2001",
+          "exerciseId": "bench-press",
           "name": "Bench Press",
           "type": "strength",
+          "completed": true,
           "sets": [
             {
+              "id": "set-20011",
               "reps": 10,
-              "weight": 60
+              "weight": 60,
+              "unit": "kg"
             },
             {
+              "id": "set-20012",
               "reps": 8,
-              "weight": 70
+              "weight": 70,
+              "unit": "kg"
             },
             {
+              "id": "set-20013",
               "reps": 6,
-              "weight": 80
+              "weight": 80,
+              "unit": "kg"
             }
-          ],
-          "completed": true
+          ]
         },
         {
+          "id": "we-2002",
+          "exerciseId": "incline-dumbbell-press",
           "name": "Incline Dumbbell Press",
           "type": "strength",
+          "completed": true,
           "sets": [
             {
+              "id": "set-20021",
               "reps": 10,
-              "weight": 20
+              "weight": 20,
+              "unit": "kg"
             },
             {
+              "id": "set-20022",
               "reps": 10,
-              "weight": 22
+              "weight": 22,
+              "unit": "kg"
             }
-          ],
-          "completed": true
+          ]
+        },
+        {
+          "id": "we-2003",
+          "exerciseId": "triceps-dips",
+          "name": "Triceps Dips",
+          "type": "strength",
+          "completed": true,
+          "sets": [
+            {
+              "id": "set-20031",
+              "reps": 12,
+              "weight": 0,
+              "unit": "kg"
+            },
+            {
+              "id": "set-20032",
+              "reps": 10,
+              "weight": 0,
+              "unit": "kg"
+            }
+          ]
         }
       ],
       "done": true,
@@ -167,11 +236,27 @@
       "isRestDay": false,
       "exercises": [
         {
+          "id": "we-3001",
+          "exerciseId": "outdoor-run",
           "name": "Outdoor Run",
           "type": "cardio",
+          "completed": true,
           "durationMin": 30,
           "distanceKm": 5,
-          "completed": true
+          "sets": [
+            {
+              "id": "set-30011",
+              "reps": 1,
+              "weight": 5,
+              "unit": "km"
+            },
+            {
+              "id": "set-30012",
+              "reps": 1,
+              "weight": 30,
+              "unit": "min"
+            }
+          ]
         }
       ],
       "done": true,
@@ -187,26 +272,68 @@
       "isRestDay": false,
       "exercises": [
         {
+          "id": "we-4001",
+          "exerciseId": "plank",
           "name": "Plank",
           "type": "isometric",
+          "completed": true,
           "durationSec": 90,
-          "completed": true
-        },
-        {
-          "name": "Hanging Leg Raises",
-          "type": "strength",
           "sets": [
             {
-              "reps": 12
-            },
-            {
-              "reps": 10
-            },
-            {
-              "reps": 8
+              "id": "set-40011",
+              "reps": 1,
+              "weight": 90,
+              "unit": "sec"
             }
-          ],
-          "completed": false
+          ]
+        },
+        {
+          "id": "we-4002",
+          "exerciseId": "hanging-leg-raises",
+          "name": "Hanging Leg Raises",
+          "type": "strength",
+          "completed": false,
+          "sets": [
+            {
+              "id": "set-40021",
+              "reps": 12,
+              "weight": 0,
+              "unit": "kg"
+            },
+            {
+              "id": "set-40022",
+              "reps": 10,
+              "weight": 0,
+              "unit": "kg"
+            },
+            {
+              "id": "set-40023",
+              "reps": 8,
+              "weight": 0,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "id": "we-4003",
+          "exerciseId": "ab-wheel-rollout",
+          "name": "Ab Wheel Rollout",
+          "type": "strength",
+          "completed": false,
+          "sets": [
+            {
+              "id": "set-40031",
+              "reps": 10,
+              "weight": 0,
+              "unit": "kg"
+            },
+            {
+              "id": "set-40032",
+              "reps": 8,
+              "weight": 0,
+              "unit": "kg"
+            }
+          ]
         }
       ],
       "done": false,
@@ -234,20 +361,73 @@
       "isRestDay": false,
       "exercises": [
         {
+          "id": "we-5001",
+          "exerciseId": "pull-ups",
           "name": "Pull Ups",
           "type": "strength",
+          "completed": true,
           "sets": [
             {
-              "reps": 10
+              "id": "set-50011",
+              "reps": 10,
+              "weight": 0,
+              "unit": "kg"
             },
             {
-              "reps": 8
+              "id": "set-50012",
+              "reps": 8,
+              "weight": 0,
+              "unit": "kg"
             },
             {
-              "reps": 6
+              "id": "set-50013",
+              "reps": 6,
+              "weight": 0,
+              "unit": "kg"
             }
-          ],
-          "completed": true
+          ]
+        },
+        {
+          "id": "we-5002",
+          "exerciseId": "barbell-row",
+          "name": "Barbell Row",
+          "type": "strength",
+          "completed": true,
+          "sets": [
+            {
+              "id": "set-50021",
+              "reps": 10,
+              "weight": 50,
+              "unit": "kg"
+            },
+            {
+              "id": "set-50022",
+              "reps": 8,
+              "weight": 60,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "id": "we-5003",
+          "exerciseId": "biceps-curl",
+          "name": "Biceps Curl",
+          "type": "strength",
+          "completed": true,
+          "sets": [
+            {
+              "id": "set-50031",
+              "reps": 12,
+              "weight": 12,
+              "unit": "kg"
+            },
+            {
+              "id": "set-50032",
+              "reps": 10,
+              "weight": 14,
+              "unit": "kg"
+            }
+          ]
         }
       ],
       "done": true,
@@ -256,7 +436,7 @@
     },
     {
       "title": "Rest Day",
-      "day": "Thu",
+      "day": "Sat",
       "dayDate": "2026-03-28",
       "currentDate": false,
       "disabled": false,

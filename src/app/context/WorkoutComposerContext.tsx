@@ -2,43 +2,9 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import exercisesData from '../../imports/pasted_text/exercises.json';
 import musclesData from '../../imports/pasted_text/muscles.json';
 
-export interface Set {
-    id: string;
-    reps?: number;
-    weight?: number;
-    unit: 'kg' | 'lb';
-}
+import { ExerciseSet as Set, Exercise as WorkoutExercise, Workout, DayPlan, ExerciseDef as Exercise, Muscle } from '../types/workout';
 
-export interface WorkoutExercise {
-    id: string;
-    exerciseId: string;
-    sets: Set[];
-}
-
-export interface Workout {
-    id: string;
-    name: string;
-    exercises: WorkoutExercise[];
-}
-
-export interface DayPlan {
-    date: string;
-    workout: Workout | null;
-    restDay: boolean;
-    completed: boolean;
-}
-
-export interface Exercise {
-    id: string;
-    name: string;
-    muscleIds: string[];
-}
-
-export interface Muscle {
-    id: string;
-    label: string;
-    group: string;
-}
+export type { Set, WorkoutExercise, Workout, DayPlan, Exercise, Muscle };
 
 interface WorkoutComposerContextType {
     exercises: Exercise[];
